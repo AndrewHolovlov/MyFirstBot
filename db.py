@@ -56,10 +56,10 @@ session = sessionmaker(bind=engine)()
 
 #print(names)
 
-#for item in session.query(Serial).all():
-#    session.delete(item)
+'''for item in session.query(User).all():
+    session.delete(item)
 
-#session.commit()
+session.commit()'''
 
 #for serial in session.query(Serial).all():
     #print(serial.name)
