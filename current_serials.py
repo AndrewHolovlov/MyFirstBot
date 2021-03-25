@@ -15,21 +15,25 @@ URL = "https://rezka.ag/"
 HEADERS = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36', 'accept':'*/*' }
 
 def search_current_serials(html = get_html(URL)):
-    while(True):
-        if html.status_code == 200:
-            html = html.text
-            soup = BeautifulSoup(html, 'html.parser')
-            items = soup.find_all('li', class_='b-seriesupdate__block_list_item')
-            for item in items:
-                name = item.find('a', class_='b-seriesupdate__block_list_link')
-                if name != None:
-                    name = name.get_text()
-                    if session.query(Serial).filter(Serial.name == name.lower()).first() == None:
-                        session.add(Serial(name=name.lower()))
-            session.commit()
-        else:
-            print("Error status_code")
-        print("search_current_serials")
-        time.sleep(60)
+    if html.status_code == 200:
+        html = html.text
+        soup = BeautifulSoup(html, 'html.parser')
+        items = soup.find_all('li', class_='b-seriesupdate__block_list_item')
+        for item in items:
+            name = item.find('a', class_='b-seriesupdate__block_list_link')
+            if name != None:
+                name = name.get_text()
+                if session.query(Serial).filter(Serial.name == name.lower()).first() == None:
+                    session.add(Serial(name=name.lower()))
+        session.commit()
+    else:
+        print("Error status_code")
+    print("search_current_serials")
 
-search_current_serials()
+def run_search_current_serials():
+    while True:
+        try:
+            search_current_serials()
+            time.sleep(3600)
+        except:
+            print("Erro.search_current_serials")

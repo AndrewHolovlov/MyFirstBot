@@ -20,14 +20,12 @@ def get_html(url):
     return  r
 
 def parse():
-    while(True):
-        html = get_html(URL)
-        if html.status_code == 200:
-            get_content(html.text)
-        else:
-            print("Error status_code")
-            print("parse")
-        time.sleep(60)
+    html = get_html(URL)
+    if html.status_code == 200:
+        get_content(html.text)
+    else:
+        print("Error status_code")
+    print("parse")
 
 def get_content(html):
     soup = BeautifulSoup(html, 'html.parser')
@@ -45,9 +43,14 @@ def get_content(html):
                     tv[serial.name].append(item.find('span', class_='season').get_text() +" "+ item.find('span', class_='cell cell-2').get_text())
         if len(tv[serial.name]) == 0:
             tv[serial.name].append("За последнии сутки обновлений не было")
-    print(tv)
+    #print(tv)
     with open('serial.json', 'w') as j:
         json.dump(tv, j)
 
-
-parse()
+def run_parse():
+    while True:
+        try:
+            parse()
+            time.sleep(3600)
+        except:
+            print("Error.parse")

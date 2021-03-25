@@ -108,4 +108,10 @@ def delete(message):
         else:
             bot.send_message(message.chat.id, "Вы еще не добавили сериалы, воспользуйтесь командой add")
 
-bot.polling()
+
+def bot_start():
+    while True:
+        try:
+            bot.polling()
+        except:
+            print("Error.polling")
