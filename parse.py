@@ -39,11 +39,11 @@ def get_content(html):
             name = item.find('a', class_='b-seriesupdate__block_list_link')
             if name != None:
                 name = name.get_text()
-                if name.lower() == serial.name:
+                if name == serial.name:
                     tv[serial.name].append(item.find('span', class_='season').get_text() +" "+ item.find('span', class_='cell cell-2').get_text())
         if len(tv[serial.name]) == 0:
             tv[serial.name].append("За последнии сутки обновлений не было")
-    #print(tv)
+    print(tv)
     with open('serial.json', 'w') as j:
         json.dump(tv, j)
 

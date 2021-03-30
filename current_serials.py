@@ -24,7 +24,7 @@ def search_current_serials(html = get_html(URL)):
             if name != None:
                 name = name.get_text()
                 if session.query(Serial).filter(Serial.name == name.lower()).first() == None:
-                    session.add(Serial(name=name.lower()))
+                    session.add(Serial(name=name))
         session.commit()
     else:
         print("Error status_code")
