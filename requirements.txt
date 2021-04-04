@@ -1,0 +1,6 @@
+requests
+beautifulsoup4
+SQLAlchemy
+pyTelegramBotAPI
+python-dotenv
+psycopg2-binary
