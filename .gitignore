@@ -1,0 +1,6 @@
+__pycache__/
+fbot
+fbot/*
+.env
+.idea/
+.vscode

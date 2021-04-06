@@ -1,12 +1,12 @@
 from threading import Thread
-from telegram import bot_start
-from parse import parse
-from current_serials import run_search_current_serials
+from bot import bot_start
+from new_episodes import run_parse
+
 
 def main():
-    Thread(target= bot_start).start()
-    #Thread(target=parse).start()
-    #Thread(target=run_search_current_serials()).start()
+    Thread(target=bot_start).start()
+    Thread(target=run_parse).start()
+
 
 main()
 
